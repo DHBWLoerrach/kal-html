@@ -32,11 +32,11 @@ Interaktion: Der Client lädt abgelaufene Feeds selbsttätig nach.
 http://localhost:8000/?kurs=TIF25A&ansicht=woche&datum=2026-06-08
 ```
 
-| Parameter | Werte | Default |
-|---|---|---|
-| `kurs` | Kurskürzel, z. B. `TIF25A`, `WWI24B` | - |
-| `ansicht` | `woche`, `monat`, `liste` | `woche` |
-| `datum` | ISO-Datum als Anker der Ansicht | heute |
+| Parameter | Werte                                | Default |
+| --------- | ------------------------------------ | ------- |
+| `kurs`    | Kurskürzel, z. B. `TIF25A`, `WWI24B` | -       |
+| `ansicht` | `woche`, `monat`, `liste`            | `woche` |
+| `datum`   | ISO-Datum als Anker der Ansicht      | heute   |
 
 `datum` wird beim Navigieren nur in die URL geschrieben, wenn es nicht
 „heute" ist — ein Bookmark ohne `datum` zeigt also immer die aktuelle Woche.
@@ -55,14 +55,33 @@ eine Datei bereitstellt.
 
 Der Python-Code in `server.py` definiert einen Statischer Server und ICS-Proxy (Python-Stdlib).
 
-Im Verzeichnis `public` befinden sich Dateien mit dem Code für die Webapp: 
+Im Verzeichnis `public` befinden sich Dateien mit dem Code für die Webapp:
 
-| Datei | Aufgabe |
-|---|---|
-| `index.html` | Seitengerüst |
-| `style.css` | Gestaltung |
-| `app.js` | Zustand, URL-Synchronisation, Steuerung |
-| `ics.js` | Minimaler ICS-Parser |
-| `views.js` | Renderer der drei Ansichten |
-| `dhbw-logo.svg` | Logo der DHBW als SVG |
-| `courses.json` | Gepflegte Kursliste (muss erstellt werden, siehe `courses.example.json`) |
+| Datei           | Aufgabe                                                                  |
+| --------------- | ------------------------------------------------------------------------ |
+| `index.html`    | Seitengerüst                                                             |
+| `style.css`     | Gestaltung                                                               |
+| `app.js`        | Zustand, URL-Synchronisation, Steuerung                                  |
+| `ics.js`        | Minimaler ICS-Parser                                                     |
+| `views.js`      | Renderer der drei Ansichten                                              |
+| `dhbw-logo.svg` | Logo der DHBW als SVG                                                    |
+| `courses.json`  | Gepflegte Kursliste (muss erstellt werden, siehe `courses.example.json`) |
+
+## Deployment
+
+Das Docker-Image wird über GitHub Actions gebaut und in die GitHub Container Registry veröffentlicht. Der VPS lädt die aktuelle Version aus GHCR und startet den Container über Docker Compose neu.
+
+Ablauf:
+
+1. Änderungen nach GitHub pushen.
+2. GitHub Actions baut das Docker-Image.
+3. Das Image wird bei GitHub in die GHCR gepusht.
+4. Auf dem VPS wird das neue Image gepullt.
+5. Docker Compose startet den Container mit dem aktualisierten Image neu.
+
+Auf dem VPS deployen:
+
+```bash
+docker compose pull dhbw-calendar
+docker compose up -d dhbw-calendar
+```
