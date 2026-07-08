@@ -74,7 +74,7 @@ Das Docker-Image wird über GitHub Actions gebaut und in die GitHub Container Re
 Ablauf:
 
 1. Änderungen nach GitHub pushen.
-2. GitHub Actions baut das Docker-Image (nur wenn sich relevante Dateien ändern, siehe [.github/workflows/docker.yml](`.github/workflows/docker.yml`)).
+2. GitHub Actions baut das Docker-Image (nur wenn sich relevante Dateien ändern, siehe [`.github/workflows/docker.yml`](.github/workflows/docker.yml)).
 3. Das Image wird bei GitHub in die GHCR gepusht.
 4. Auf dem VPS wird das neue Image gepullt.
 5. Docker Compose startet den Container mit dem aktualisierten Image neu.
