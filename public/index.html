@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vorlesungsplan · DHBW Lörrach</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='15' height='15' x='2' y='8' fill='%23e2001a'/%3E%3Cpath d='M17 8h8v8l-8 8z' fill='%235c6971'/%3E%3Cpath d='M10 23h7v7z' fill='%235c6971' opacity='.8'/%3E%3C/svg%3E"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Spline+Sans+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <a class="brand-link" href="/" aria-label="Kursübersicht">
+          <img src="dhbw-logo.svg" alt="Logo der DHBW"> 
+        </a>
+        <span class="brand-sub"
+          ><strong>Vorlesungsplan</strong>DHBW Lörrach</span
+        >
+      </div>
+      <div class="kurs-picker">
+        <select id="kursSelect" aria-label="Kurs wählen">
+          <option value="" disabled hidden>Kurs wählen…</option>
+        </select>
+        <form id="kursForm">
+          <input
+            id="kursInput"
+            type="text"
+            placeholder="Anderes Kürzel…"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Kurskürzel eingeben"
+          />
+          <button type="submit" aria-label="Kurs laden">→</button>
+        </form>
+      </div>
+    </header>
+
+    <section class="kurs-hero">
+      <h1 id="kursTitle">&nbsp;</h1>
+      <p id="kursMeta"></p>
+    </section>
+
+    <nav class="controls">
+      <div class="view-switch" role="group" aria-label="Ansicht">
+        <button type="button" data-ansicht="woche">Woche</button>
+        <button type="button" data-ansicht="monat">Monat</button>
+        <button type="button" data-ansicht="liste">Liste</button>
+      </div>
+      <div class="range-label" id="rangeLabel"></div>
+      <div class="nav-buttons">
+        <button type="button" id="navPrev" aria-label="Zurück">←</button>
+        <button type="button" id="navToday">Heute</button>
+        <button type="button" id="navNext" aria-label="Weiter">→</button>
+      </div>
+      <p id="navLimitHint" class="nav-limit-hint" aria-live="polite" hidden>
+        Ältere Termine sind nicht verfügbar.
+      </p>
+    </nav>
+
+    <main id="calendar" class="calendar" aria-live="polite"></main>
+
+    <footer class="footer">
+      Quelle: ICS-Feed <a id="icsLink" href="#">kal-…</a> · DHBW Lörrach · URL
+      mit <code>?kurs=…&amp;ansicht=…</code> ist teil- und bookmarkbar
+    </footer>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

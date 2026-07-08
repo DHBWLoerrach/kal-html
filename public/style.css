@@ -1,0 +1,1086 @@
+/* Vorlesungsplan DHBW Lörrach — übertragenes DHBW-Corporate-Design:
+   offizielles Rot und Grau, weiße Flächen, klare Raster und Serif-Akzente. */
+
+:root {
+  --dhbw-red: #e2001a;
+  --dhbw-gray: #5c6971;
+  --paper: #ffffff;
+  --paper-deep: #f0f2f3;
+  --card: #ffffff;
+  --ink: #202528;
+  --ink-soft: var(--dhbw-gray);
+  --line: #d8dcde;
+  --line-strong: var(--dhbw-gray);
+  --red: var(--dhbw-red);
+  --red-soft: #fff0f2;
+  --sans: 'Archivo', 'Arial Narrow', Arial, sans-serif;
+  --serif: Georgia, 'Times New Roman', serif;
+  --mono: 'Spline Sans Mono', ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+a {
+  color: var(--red);
+}
+
+button,
+select,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+/* ---- Kopfbereich ---------------------------------------------------------- */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  min-height: 96px;
+  padding: 18px 36px;
+  background: #fff;
+  border-bottom: 1px solid #e7e9ea;
+  box-shadow: 0 3px 14px rgba(32, 37, 40, 0.08);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.brand-link {
+  display: block;
+  color: inherit;
+  line-height: 0;
+}
+
+.brand-link:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 5px;
+}
+
+.dhbw-logo {
+  display: block;
+  width: 190px;
+  height: 54px;
+}
+
+.brand-sub {
+  display: grid;
+  gap: 2px;
+  padding-left: 20px;
+  border-left: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  line-height: 1.2;
+}
+
+.brand-sub strong {
+  color: var(--ink);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+}
+
+.kurs-picker {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 9px;
+  background: var(--paper-deep);
+}
+
+.kurs-picker select,
+.kurs-picker input {
+  background: var(--card);
+  border: 1px solid var(--line-strong);
+  border-radius: 0;
+  min-height: 42px;
+  padding: 8px 12px;
+}
+
+.kurs-picker input {
+  width: 150px;
+}
+.kurs-picker input::placeholder {
+  color: var(--ink-soft);
+}
+
+.kurs-picker select:focus-visible,
+.kurs-picker input:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 1px;
+}
+
+#kursForm {
+  display: flex;
+}
+
+#kursForm button {
+  min-width: 44px;
+  border: 1px solid var(--red);
+  border-left: none;
+  background: var(--red);
+  color: #fff;
+  padding: 0 15px;
+  cursor: pointer;
+}
+#kursForm button:hover {
+  background: var(--dhbw-gray);
+  border-color: var(--dhbw-gray);
+}
+
+/* ---- Hero ----------------------------------------------------------------- */
+
+.kurs-hero {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: baseline;
+  gap: clamp(16px, 3vw, 36px);
+  flex-wrap: wrap;
+  padding: 12px 36px;
+  background:
+    linear-gradient(
+      115deg,
+      transparent 0 77%,
+      rgba(226, 0, 26, 0.08) 77% 84%,
+      transparent 84%
+    ),
+    var(--paper-deep);
+  border-bottom: 1px solid var(--line);
+  animation: rise 0.45s ease-out both;
+}
+
+.kurs-hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: clamp(14px, 2.4vw, 34px);
+  height: 100%;
+  background: var(--red);
+}
+
+.kurs-hero h1 {
+  margin: 0;
+  color: var(--dhbw-gray);
+  font-family: "Times New Roman", Times, serif;
+  font-size: clamp(42px, 6vw, 68px);
+  font-weight: 400;
+  font-variant-numeric: lining-nums;
+  line-height: 0.88;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+}
+
+.kurs-hero p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.kurs-hero p::before {
+  content: '';
+  display: inline-block;
+  width: 48px;
+  height: 3px;
+  margin-right: 12px;
+  background: var(--red);
+  vertical-align: middle;
+}
+
+/* ---- Steuerleiste ----------------------------------------------------------- */
+
+.controls {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 12px 36px;
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 3px 10px rgba(32, 37, 40, 0.06);
+  backdrop-filter: blur(8px);
+}
+
+.view-switch {
+  display: flex;
+}
+
+.view-switch button {
+  border: 1px solid var(--line-strong);
+  border-right: none;
+  background: var(--card);
+  padding: 9px 20px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+.view-switch button:last-child {
+  border-right: 1px solid var(--line-strong);
+}
+.view-switch button:hover {
+  background: var(--red-soft);
+}
+.view-switch button.is-active {
+  background: var(--red);
+  border-color: var(--red);
+  color: #fff;
+}
+
+.range-label {
+  color: var(--dhbw-gray);
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 19px;
+}
+
+.nav-buttons {
+  display: flex;
+}
+
+.nav-buttons button {
+  border: 1px solid var(--line-strong);
+  border-right: none;
+  background: var(--card);
+  padding: 9px 15px;
+  cursor: pointer;
+  font-weight: 700;
+}
+.nav-buttons button:last-child {
+  border-right: 1px solid var(--line-strong);
+}
+.nav-buttons button:hover {
+  background: var(--red);
+  color: #fff;
+}
+.nav-buttons button:disabled {
+  cursor: not-allowed;
+  color: var(--ink-soft);
+  background: var(--paper-deep);
+}
+
+.nav-limit-hint {
+  flex: 0 0 100%;
+  order: 4;
+  margin: 0;
+  text-align: right;
+  color: var(--ink-soft);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+/* ---- Kalenderfläche --------------------------------------------------------- */
+
+.calendar {
+  padding: 26px 36px 48px;
+}
+
+.loading {
+  color: var(--ink-soft);
+  font-family: var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 13px;
+}
+
+.error {
+  max-width: 520px;
+  border: 1.5px solid var(--red);
+  background: var(--red-soft);
+  padding: 20px 24px;
+}
+.error-title {
+  margin: 0 0 8px;
+  font-stretch: 115%;
+  text-transform: uppercase;
+  font-size: 18px;
+}
+.error-text {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 13px;
+}
+.error-hint {
+  margin: 10px 0 0;
+  color: var(--ink-soft);
+  font-size: 13px;
+}
+
+/* ---- Wochenansicht ----------------------------------------------------------- */
+
+.week {
+  display: grid;
+  grid-template-columns: 64px repeat(var(--day-count), minmax(130px, 1fr));
+  border: 1.5px solid var(--line-strong);
+  background: var(--card);
+  overflow-x: auto;
+}
+
+.day-head {
+  display: block;
+  width: 100%;
+  padding: 9px 10px;
+  border: none;
+  border-bottom: 1.5px solid var(--line-strong);
+  background: var(--paper-deep);
+  font-weight: 800;
+  font-size: 12.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-align: left;
+  cursor: pointer;
+}
+.day-head:not(.day-head--spacer) {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: space-between;
+}
+.day-head:not(.day-head--spacer)::after {
+  content: '';
+  flex: 0 0 auto;
+  width: 13px;
+  height: 12px;
+  opacity: 0.48;
+  background:
+    linear-gradient(currentColor, currentColor) 0 1px / 13px 1.5px no-repeat,
+    linear-gradient(currentColor, currentColor) 0 5px / 13px 1.5px no-repeat,
+    linear-gradient(currentColor, currentColor) 0 9px / 13px 1.5px no-repeat;
+}
+.day-head:hover {
+  color: var(--red);
+}
+.day-head:not(.day-head--spacer):hover::after,
+.day-head:not(.day-head--spacer):focus-visible::after {
+  opacity: 0.9;
+}
+.day-head--spacer {
+  cursor: default;
+}
+/* Leerer Spacer hat keine Zeilenbox und wäre niedriger als die Tagesköpfe —
+   dann fluchten Zeitlabels und Stundenlinien nicht mehr. */
+.day-head--spacer::before {
+  content: '\a0';
+}
+
+.week-day {
+  border-left: 1px solid var(--line);
+  min-width: 0;
+}
+.week-times {
+  position: relative;
+}
+
+.week-day.is-today .day-head {
+  background: var(--red);
+  color: #fff;
+}
+
+.times-body {
+  position: relative;
+}
+
+.time-label {
+  position: absolute;
+  right: 8px;
+  transform: translateY(-50%);
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-soft);
+}
+
+.day-allday {
+  padding: 1px;
+  border-bottom: 1px solid var(--line);
+  background: var(--paper);
+  overflow: hidden;
+}
+
+.event-allday {
+  height: 22px;
+  line-height: 18px;
+  margin: 2px;
+  padding: 2px 8px;
+  background: var(--red-soft);
+  border-left: 3px solid var(--red);
+  font-size: 11.5px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.day-body {
+  position: relative;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    var(--line) 0,
+    var(--line) 1px,
+    transparent 1px,
+    transparent var(--hour-px)
+  );
+}
+
+.week-day.is-today .day-body {
+  background-color: rgba(226, 0, 26, 0.035);
+}
+
+.event {
+  position: absolute;
+  overflow: hidden;
+  margin: 1px 2px;
+  padding: 6px 8px 6px 10px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--red);
+  box-shadow: 2px 2px 0 rgba(24, 21, 16, 0.08);
+  animation: rise 0.4s ease-out both;
+  transition:
+    box-shadow 0.15s,
+    transform 0.15s;
+}
+.event--compact {
+  padding: 3px 8px 3px 10px;
+}
+.event--compact .ev-title {
+  display: inline;
+  margin: 0 6px 0 0;
+  font-size: 11.5px;
+}
+.event--compact .ev-time {
+  display: inline;
+}
+.event--compact .ev-location {
+  display: none;
+}
+.event--compact .ev-description {
+  display: none;
+}
+
+.event:hover {
+  transform: translateY(-1px);
+  box-shadow: 4px 5px 0 rgba(24, 21, 16, 0.14);
+  z-index: 5;
+}
+
+.ev-title {
+  margin: 0 0 3px;
+  font-size: 12.5px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.ev-time {
+  display: block;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-soft);
+}
+
+.ev-description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin: 4px 0 0;
+  color: var(--ink-soft);
+  font-size: 11.5px;
+  line-height: 1.25;
+  white-space: pre-line;
+}
+
+.ev-location {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 1px 6px;
+  background: var(--paper-deep);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+}
+.ev-location--online {
+  background: var(--red-soft);
+  color: var(--red);
+  text-decoration: none;
+}
+.ev-location--online:hover {
+  text-decoration: underline;
+}
+
+.now-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 0;
+  border-top: 2px solid var(--red);
+  z-index: 6;
+  pointer-events: none;
+}
+.now-line::before {
+  content: '';
+  position: absolute;
+  left: -1px;
+  top: -5px;
+  width: 8px;
+  height: 8px;
+  background: var(--red);
+  border-radius: 50%;
+}
+
+/* ---- Monatsansicht ----------------------------------------------------------- */
+
+.month {
+  display: grid;
+  --month-weekday-track: minmax(0, 1fr);
+  --month-weekend-track: minmax(0, 0.72fr);
+  /* minmax(0, …): bei 1fr allein dürfen Spalten nicht unter ihre
+     min-content-Breite schrumpfen — lange nowrap-Chips erzwängen dann
+     horizontales Seiten-Scrolling. */
+  grid-template-columns:
+    repeat(5, var(--month-weekday-track))
+    repeat(2, var(--month-weekend-track));
+  border: 1.5px solid var(--line-strong);
+  background: var(--card);
+}
+
+.month-headcell {
+  padding: 8px 10px;
+  background: var(--paper-deep);
+  border-bottom: 1.5px solid var(--line-strong);
+  border-left: 1px solid var(--line);
+  font-weight: 800;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.month-cell {
+  position: relative;
+  min-height: 96px;
+  padding: 6px;
+  border-left: 1px solid var(--line);
+  border-top: 1px solid var(--line);
+}
+.month-headcell:first-child,
+.month-cell--week-start {
+  border-left: none;
+}
+
+.month-cell.is-outside {
+  background: var(--paper);
+}
+.month-cell.is-outside .month-daynum {
+  color: var(--line);
+}
+.month-cell.is-week-active {
+  box-shadow: inset 0 0 0 999px rgba(226, 0, 26, 0.035);
+}
+
+.month-cell.is-today {
+  background: var(--red-soft);
+}
+.month-cell.is-today .month-daynum {
+  background: var(--red);
+  color: #fff;
+}
+
+.month-daynum {
+  display: inline-block;
+  min-width: 24px;
+  padding: 1px 5px;
+  margin-bottom: 4px;
+  border: none;
+  background: none;
+  font-family: var(--mono);
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+}
+.month-daynum:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.month-week-cue {
+  position: absolute;
+  top: 10px;
+  right: 8px;
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-top: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+  color: var(--ink-soft);
+  opacity: 0.24;
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+.month-cell.is-week-active .month-week-cue {
+  color: var(--red);
+  opacity: 0.95;
+}
+
+.month-chip {
+  display: flex;
+  width: 100%;
+  gap: 5px;
+  align-items: baseline;
+  margin-top: 2px;
+  padding: 2px 5px;
+  border: none;
+  background: var(--paper);
+  border-left: 3px solid var(--red);
+  color: inherit;
+  font: inherit;
+  font-size: 11px;
+  text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.month-chip:hover,
+.month-chip:focus-visible,
+.month-chip[aria-expanded='true'] {
+  background: var(--red-soft);
+}
+.month-chip:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 1px;
+}
+.chip-time {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ink-soft);
+  flex-shrink: 0;
+}
+.chip-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 600;
+}
+
+.month-detail {
+  display: grid;
+  grid-template-columns:
+    repeat(5, var(--month-weekday-track))
+    repeat(2, var(--month-weekend-track));
+  grid-column: 1 / -1;
+  margin-top: 6px;
+  padding: 0;
+  white-space: normal;
+}
+
+.month-detail-card {
+  grid-column: var(--detail-start) / span var(--detail-span);
+  min-width: 0;
+  padding: 7px 8px 8px;
+  background: var(--card);
+  border: 1px solid var(--line-strong);
+  box-shadow: 2px 2px 0 rgba(24, 21, 16, 0.1);
+  font-size: 11.5px;
+}
+
+.month-detail-head {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.month-detail-main {
+  min-width: 0;
+}
+.month-detail .ev-title {
+  margin-bottom: 2px;
+}
+.month-detail .ev-location {
+  margin-top: 6px;
+}
+.month-detail .ev-description {
+  display: block;
+  -webkit-line-clamp: unset;
+  overflow: visible;
+}
+
+.month-detail-close {
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink-soft);
+  font: inherit;
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+}
+.month-detail-close:hover,
+.month-detail-close:focus-visible {
+  border-color: var(--red);
+  color: var(--red);
+}
+.month-detail-close:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 1px;
+}
+
+/* ---- Listenansicht ------------------------------------------------------------ */
+
+.list {
+  max-width: 760px;
+}
+
+.list-dayhead {
+  margin: 26px 0 8px;
+  color: var(--red);
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  border-bottom: 1px solid var(--line-strong);
+  padding-bottom: 7px;
+}
+.list-dayhead:first-child {
+  margin-top: 0;
+}
+
+.list-dayhead-button {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.list-dayhead-button::after {
+  content: '';
+  flex: 0 0 auto;
+  width: 7px;
+  height: 7px;
+  border-top: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+  opacity: 0.52;
+  transform: rotate(45deg);
+}
+.list-dayhead-button:hover {
+  color: var(--ink);
+}
+.list-dayhead-button:hover::after,
+.list-dayhead-button:focus-visible::after {
+  opacity: 0.95;
+}
+.list-dayhead-button:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 3px;
+}
+
+.list-row {
+  display: flex;
+  gap: 18px;
+  padding: 10px 12px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--red);
+  margin-top: 6px;
+  box-shadow: 2px 2px 0 rgba(24, 21, 16, 0.06);
+  animation: rise 0.35s ease-out both;
+}
+.list-row--action {
+  align-items: flex-start;
+}
+.list-row--action:hover {
+  border-color: var(--line-strong);
+  box-shadow: 4px 5px 0 rgba(24, 21, 16, 0.12);
+}
+
+.list-row-action {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  margin-left: auto;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink-soft);
+  font: inherit;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+}
+.list-row-action:hover,
+.list-row-action:focus-visible {
+  border-color: var(--red);
+  color: var(--red);
+}
+.list-row-action:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 2px;
+}
+
+.list-time {
+  flex-shrink: 0;
+  width: 110px;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 500;
+  padding-top: 1px;
+}
+
+.list-main .ev-title {
+  font-size: 14px;
+}
+.list-main {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.list-main .ev-location {
+  margin-top: 5px;
+}
+.list-main .ev-description {
+  display: block;
+  margin-top: 6px;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.list-empty {
+  color: var(--ink-soft);
+  font-family: var(--mono);
+}
+
+/* ---- Kurs-Startseite ---------------------------------------------------------- */
+
+.course-start {
+  display: grid;
+  gap: 30px;
+  width: 100%;
+  max-width: none;
+}
+
+.course-group {
+  display: grid;
+  gap: 12px;
+}
+
+.course-group-title {
+  margin: 0;
+  color: var(--dhbw-gray);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.course-card {
+  display: grid;
+  place-items: center;
+  gap: 8px;
+  min-height: 88px;
+  padding: 12px 18px;
+  border: 1.5px solid var(--line-strong);
+  background: var(--card);
+  cursor: pointer;
+  text-align: center;
+  box-shadow: 3px 3px 0 rgba(32, 37, 40, 0.08);
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s,
+    transform 0.15s;
+}
+
+.course-card:hover {
+  border-color: var(--red);
+  box-shadow: 5px 6px 0 rgba(32, 37, 40, 0.12);
+  transform: translateY(-1px);
+}
+
+.course-card-code {
+  color: var(--dhbw-gray);
+  font-family: var(--serif);
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ---- Fußzeile ------------------------------------------------------------------ */
+
+.footer {
+  padding: 24px 36px;
+  border-top: 5px solid var(--red);
+  background: #2b2b2b;
+  color: #c8cdcf;
+  font-size: 12.5px;
+}
+.footer a {
+  color: #fff;
+}
+.footer code {
+  font-family: var(--mono);
+  font-size: 11.5px;
+}
+
+/* ---- Animation ------------------------------------------------------------------ */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ---- Schmale Bildschirme ---------------------------------------------------------- */
+
+@media (max-width: 720px) {
+  .topbar,
+  .controls,
+  .calendar,
+  .footer {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .topbar {
+    align-items: stretch;
+    min-height: 0;
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+  .brand {
+    gap: 12px;
+  }
+  .dhbw-logo {
+    width: 152px;
+    height: auto;
+  }
+  .brand-sub {
+    padding-left: 12px;
+  }
+  .kurs-picker {
+    width: 100%;
+  }
+  .kurs-picker select {
+    flex: 1;
+    min-width: 120px;
+  }
+  #kursForm {
+    flex: 1;
+    min-width: 190px;
+  }
+  .kurs-picker input {
+    width: 100%;
+    min-width: 0;
+  }
+  .kurs-hero {
+    gap: 8px 16px;
+    padding: 10px 16px;
+  }
+  .kurs-hero h1 {
+    font-size: clamp(38px, 14vw, 56px);
+  }
+  .kurs-hero p {
+    max-width: calc(100% - 22px);
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    line-height: 1.55;
+  }
+  .kurs-hero p::before {
+    width: 28px;
+    margin-right: 8px;
+  }
+  .controls {
+    position: static;
+  }
+  .range-label {
+    order: 3;
+    width: 100%;
+    padding-top: 2px;
+    font-size: 17px;
+  }
+  .list-row {
+    flex-direction: column;
+    gap: 4px;
+  }
+  .list-time {
+    width: auto;
+  }
+  .month-detail-card {
+    grid-column: 1 / -1;
+  }
+  .course-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 430px) {
+  .brand-sub {
+    display: none;
+  }
+  .view-switch button {
+    padding-inline: 13px;
+  }
+  .nav-buttons button {
+    padding-inline: 12px;
+  }
+}

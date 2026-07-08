@@ -1,0 +1,34 @@
+services:
+  dhbw-calendar:
+    image: ghcr.io/dhbwloerrach/dhbw-calendar:latest
+    container_name: cal
+    restart: unless-stopped
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    expose:
+      - '8000'
+    environment:
+      HOST: '0.0.0.0'
+    networks:
+      network_szi:
+        ipv4_address: 172.20.10.7
+        ipv6_address: fd62:c4ca:dc82:2::7
+    volumes:
+      - /etc/docker-compose/cal/courses.json:/app/public/courses.json:ro
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.dhbw-calendar.rule=Host(`cal.apps.szi.dhbw-loerrach.de`)'
+      - 'traefik.http.routers.dhbw-calendar.entrypoints=websecure'
+      - 'traefik.http.routers.dhbw-calendar.tls.certresolver=letsencrypt'
+      - 'traefik.http.routers.dhbw-calendar.middlewares=dhbw-calendar-ratelimit,dhbw-calendar-basic-auth'
+      - 'traefik.http.middlewares.dhbw-calendar-ratelimit.ratelimit.average=30'
+      - 'traefik.http.middlewares.dhbw-calendar-ratelimit.ratelimit.burst=60'
+      - 'traefik.http.middlewares.dhbw-calendar-basic-auth.basicauth.users=${DHBW_AUTH:?DHBW_AUTH must be set}'
+      - 'traefik.http.services.dhbw-calendar.loadbalancer.server.port=8000'
+
+networks:
+  network_szi:
+    external: true
