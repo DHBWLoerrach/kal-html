@@ -50,7 +50,9 @@ export function qs(sel, root = document) {
 }
 
 export function normalizeCourse(kurs) {
-  return String(kurs ?? '').trim().toUpperCase();
+  return String(kurs ?? '')
+    .trim()
+    .toUpperCase();
 }
 
 // ---- URL-Synchronisation -----------------------------------------------------
@@ -67,7 +69,11 @@ function readURL() {
 }
 
 function writeURL() {
-  history.replaceState(null, '', urlForState(location.pathname, location.search, state));
+  history.replaceState(
+    null,
+    '',
+    urlForState(location.pathname, location.search, state),
+  );
 }
 
 export function urlForState(pathname, search, nextState, today = now()) {
@@ -251,7 +257,9 @@ export function renderCourseStart(courseList, selectCourse) {
 
   for (const group of groups) {
     const section = el('section', 'course-group', '');
-    section.appendChild(el('h2', 'course-group-title', group.name));
+    section.appendChild(
+      el('h2', 'course-group-title', `${group.name} (${group.code})`),
+    );
 
     const grid = el('div', 'course-grid', '');
     for (const kurs of group.courses) {
