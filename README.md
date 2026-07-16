@@ -85,3 +85,24 @@ Auf dem VPS deployen:
 docker compose pull dhbw-calendar
 docker compose up -d dhbw-calendar
 ```
+
+### Traefik und Basic Auth
+
+Der Container läuft auf dem VPS hinter Traefik. Traefik übernimmt TLS,
+Rate-Limiting und den Passwortschutz per HTTP Basic Auth. Benutzername und
+Passwort-Hash werden aus der in `.env` gesetzten Variablen `DHBW_AUTH` gelesen.
+
+Unter macOS lässt sich ein neuer bcrypt-Hash mit dem vorinstallierten
+`htpasswd` erzeugen. Das Passwort wird dabei interaktiv abgefragt und nicht
+in die Shell-History geschrieben:
+
+```bash
+htpasswd -nB -C 10 BENUTZERNAME
+```
+
+Die vollständige Ausgabe unverändert und mit einfachen Anführungszeichen in
+`.env` eintragen:
+
+```dotenv
+DHBW_AUTH='BENUTZERNAME:$2y$10$REST_DES_HASHES'
+```
